@@ -1,0 +1,22 @@
+1. Mutex:
+    读者与写者互斥
+    读者之间不互斥，同时可以有多个读者
+    写者之间互斥
+
+思路：
+    read:
+        if（有写者正在写){
+            wait()
+        }else{
+            read()；
+            notifyWriter();
+        }
+
+    write：
+        if (有读者正在读||其他写者正在写||有正在等待的读者){
+            wait()
+        }else{
+            write();
+            notifyReader();
+            notifyWriter();
+        }
